@@ -1,0 +1,14 @@
+
+[ datalake ]
+	+ jenkins
+	+ helm
+	+ argocd
+	+ minio
+	+ iceberg
+	+ airflow
+	
+	+ git
+	+ bitbucket
+	+ python
+
+	
