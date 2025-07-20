@@ -1,0 +1,4 @@
+
+환경설정.
+language pack : korean-
+compact folders : 체크 해제.
