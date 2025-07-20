@@ -1,0 +1,29 @@
+ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ
+	# github.com  (korlsy@gmail.com)
+ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ
+	git config --global user.name "sangyeol.lee"
+	git config --global user.email "korlsy@gmail.com"
+	git config list
+ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ
+
+[ general_template 설정.  ]
+	git init
+	git checkout -b  main  (github에서 main으로 최초 생성)
+	git add .
+	git commit -m "first commit"
+	(원격 저장소 연결)
+	[옵션 : git branch -M main]
+	git remote add origin https://github.com/korlsy/general_template.git
+	git remote -v
+	git push origin HEAD:main (git push origin main)
+	( git push -u origin main : 업스트립 설정)
+
+
+[ branch 커멘드 ]
+	branch name 변경
+
+
+모바일에서 수정
+
+ ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ
+ 
