@@ -1,0 +1,3 @@
+python first install.
+    Scripts 폴더 Path 설정.
+    python.exe -m pip install --upgrade pip

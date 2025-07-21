@@ -1,0 +1,10 @@
+파이썬 가상환경.
+
+    python -m venv my_venv
+    .\my_venv\Scripts\activate
+        ( deactive 가상환경 exit )
+        (error 대응, power shell 관리자 실행 : Set-ExecutionPolicy RemoteSigned)
+
+    pip list -local
+
+    ctrl+shift+p : '인터프리터' 선택에서 my_venv 선택.
