@@ -20,6 +20,6 @@ pprint(sys.path) # module path
 
 설치가능한 버전 목록
 pip index versions pandas
-pip install pandas==2.0.0
+pip install pandas==1.5.3
 
 airflow 2.9.0
