@@ -1,3 +1,8 @@
 python first install.
     Scripts 폴더 Path 설정.
     python.exe -m pip install --upgrade pip
+
+
+    pip freeze
+    pip freeze > requirements.txt
+    pip install -r requirements.txt
