@@ -10,3 +10,10 @@ spec:
     - /bin/sh
     - -c
     - touch /tmp/healthy; sleep 30; rm -rf /tmp/healthy; sleep 600
+
+#ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ
+# docker image pull busybox
+# kubectl run busybox --image=busybox --dry-run
+# kubectl run my-busybox --image=busybox
+#
+# kubectl exec -it my-busybox -- /bin/bash

@@ -16,3 +16,4 @@
 	
 	k run ubuntu-python --image=ubuntu-python/test1 --image-pull-policy=Never
 	
+	kubectl get pods ubuntu-python -o yaml

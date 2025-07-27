@@ -14,7 +14,7 @@ spec:
         path: /
         port: 8080
 #ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ
-# 
+# docker image pull smlinux/unhealthy:latest
 #
 #
 #
