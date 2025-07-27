@@ -54,3 +54,8 @@ kubectl eec nginx-web -c nginx-web -it -- /bin/bash
 minikube ssh
 curl xxxxxx:80 테스트.
 exit.
+
+
+ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ
+watch -n 1 kubectl get pods -o wide
+( kubectl get pods -o wide --watch)

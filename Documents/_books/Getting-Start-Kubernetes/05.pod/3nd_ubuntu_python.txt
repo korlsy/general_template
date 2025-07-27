@@ -1,0 +1,17 @@
+
+ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ
+	FROM ubuntu:20.04
+	RUN apt update && apt install -y python3
+	WORKDIR /var/www/html
+	COPY ["index.html", "."]
+	EXPOSE 8099
+	ENTRYPOINT ["python3", "-u", "-m", "http.server"]
+ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ
+	
+	
+	#!/bin/sh
+	touch index.html
+	docker build -t ubuntu-python/test1 .
+	
+	
+	k run ubuntu-python --image=ubuntu-python/test1 --image-pull-policy=Never

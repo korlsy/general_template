@@ -1,0 +1,34 @@
+
+	ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ
+	파드 정보
+		kubectl get pods
+		kubectl get pods --all-namespaces
+		kubectl get pods -o wide
+		
+		kubectl describe pod webserver
+	ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ
+	파드 정보 수정
+		kubectl edit pod webserver
+	
+	ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ
+	파드정보 사제
+		kubectl delete pod webserver
+		[kubectl delete pod webserver --all]	
+
+	ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ
+	파드 run & dry run
+		kubectl run redis --image=redis 
+			kubectl edit pod redis
+		
+		kubectl run redis --image=redis --dry-run
+		kubectl run redis --image=redis --dry-run -o yaml
+	
+	
+	ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ
+	파드 exec
+		kubectl exec -it os -c centos -- /bin/bash
+		
+		
+		kubectl exec -it redis -- redis-cli
+		kubectl exec -it redis -c redis -- redis-cli
+	
