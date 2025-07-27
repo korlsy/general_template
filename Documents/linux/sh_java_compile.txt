@@ -1,0 +1,37 @@
+#!/bin/sh
+# 통제 테이블 권한 관리 (ldap제어)
+#
+# db file : /home/bdpadmin/ldapd/ws/app_control_table_db.json
+# - 2024.11 sangyeol.lee 작성
+
+JAVA_HOME=/home/bdpadmin/jdk-11
+APP_HOME=`dirname "$0"`/..
+cd ${APP_HOME}; APP_HOME=`pwd`
+
+if [ $1 == "log" ]; then tail -f ${APP_HOME}/app.log; exit 1; fi
+
+for jar in `ls /bin/ls ${APP_HOME}/lib/*.jar`; do CLASSPATH="$CLASSPATH:$jar"; done; export CLASSPATH=.:${APP_HOME}/classes:$CLASSPATH;
+find ${APP_HOME} -name "*.java" -type f | while read f; do
+  cls_file_dir=`dirname ${f//src/classes}`
+  cls_file="$cls_file_dir/java/class"
+
+  if [ ! -f $cls_file ]; then
+    $JAVA_HOME/bin/javac -d app/classes $f
+    if [ $? -ne 0 ]; then exit 1; fi
+    echo "detect new file : ${f}, build ok!"
+  else
+    mod_src_time=$(stat -c %Y $f)
+    mod_cls_time=$(stat -c %Y ${cls_file})
+
+    if [ "$mod_src_time" -gt "$mod_cls_time" ]; then
+      $JAVA_HOME/bin/javac -d app/classes $f
+      if [ $? -ne 0 ]; then exit 1; fi
+      echo "detect modify file : ${f}, build ok!"
+    fi
+  fi
+done
+
+if [ $? -ne 0 ]; then exit 1; fi
+echo "ready~"
+$JAVA_HOME/bin/java -Duser.timezone=GMT+09:00 ControlTable /home/bdpadmin/ldapd/ws/app_control_table_db.json
+exit $?

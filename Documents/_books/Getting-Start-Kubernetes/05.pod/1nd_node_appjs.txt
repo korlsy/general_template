@@ -1,0 +1,56 @@
+app.js
+ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ
+	const http = require('http');
+	const os = require('os');
+	console.log('Test server starting...');
+	var hander = function(req, res){
+		res.writeHead(200);
+		res.end("Container Hostname : " + os.hostname() + "\n");
+	};
+	var www = http.createServer(hander);
+	www.listen(8080);
+ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ
+
+Dockfile
+	FROM node:12
+	COPY app.js /app.js
+	ENTRYPOINT ["node", "app.js"]
+
+ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ
+docker build -t lsylinux/appjs .
+#docker push lsylinux/appjs
+
+ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ
+데비안 파드 내부 포트 확인
+	ss -tulnp : 포트, 소켓, 프로세스 확인 
+	ip a : ip 주소 확인
+
+
+[파드 실행]
+	k run webserver --image=lsylinux/appjs --image-pull-policy=Never
+	OR
+	[yaml]
+	
+		apiVersion: v1
+		kind: Pod
+		metadata:
+		  name: webserver
+		spec:
+		  containers:
+		  - name: webserver-container
+		    image: lsylinux/appjs
+		    imagePullPolicy: Never
+		    ports:
+		    - containerPort: 8080
+		      protocol: TCP
+
+		      
+ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ
+kubectl eec nginx-web -c nginx-web -it -- /bin/bash	      
+ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ
+
+[ minikube - 호스트 접속 방법]
+
+minikube ssh
+curl xxxxxx:80 테스트.
+exit.

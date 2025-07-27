@@ -1,0 +1,37 @@
+# Metrics-server
+# https://kubernetes.io/ko/docs/tasks/debug/debug-cluster/resource-metrics-pipeline/
+
+# https://github.com/kubernetes-sigs/metrics-server
+kubectl apply -f https://github.com/kubernetes-sigs/metrics-server/releases/latest/download/components.yaml
+
+
+
+#2. Prometheus 설치 및 데이터 수집, 통합
+#- 쿠버 스테이트 메트릭(kube-state-metrics)
+#  Kubernetes API 서버를 수신하고 Deployment 및 Pod와 같은
+#  Kubernetes 개체의 상태를 프로메테우스 서버가 수집할 수 있는
+#  메트릭 데이터로 변환해 공개
+#- 노드 익스포터(node-exporter)
+#  노드의 CPU, 메모리 사용량과 같은 OS 및 하드웨어 측정값인
+#  시스템 메트릭 정보를 프로메테우스에게 전달
+
+#1.1. prometheus 설치
+mkdir monitoring
+cd monitoring
+kubectl create ns monitoring
+kubectl apply -f kube-state-metrics.yaml  -f node-exporter.yaml -f prometheus.yaml
+kubectl get pod -n kube-system | grep kube-state
+kubectl get pod -n monitoring
+kubectl get svc -n monitoring | grep prome
+
+# 웹브라우저로 접속
+10.0.2.21:NodePort
+
+#1.2 간단한 애플리케이션 실행후 시계열 매트릭 정보 확인
+
+
+## Grafana 실행
+kubectl apply -f grafana.yaml 
+kubectl get all -n monitoring
+
+# Grafana 서비스 노드포트 확인 후 웹브라우저로 접속

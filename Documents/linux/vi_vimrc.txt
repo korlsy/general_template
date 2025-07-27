@@ -1,0 +1,6 @@
+
+highlight Comment term=bold ctermfg=2
+set nu
+set ts=4
+highlight Comment term=bold ctermfg=2
+highlight LineNr term=bold ctermfg=7

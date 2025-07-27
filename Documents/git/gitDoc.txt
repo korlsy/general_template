@@ -11,20 +11,23 @@
 	git checkout -b  main  (github에서 main으로 최초 생성)
 	git add .
 	git commit -m "first commit"
+		(git commit -a : add & commit)
+	
 	(원격 저장소 연결)
 	[옵션 : git branch -M main]
 	git remote add origin https://github.com/korlsy/general_template.git
 	git remote -v
 	git push origin HEAD:main (git push origin main)
-	( git push -u origin main : 업스트립 설정)
-	
+	( git push -u origin main : 업스트림 설정)
+			git remote -v
+			git remote show
+			git remote show origin
+				
 	( git branch --set-upstream-to=origin/main main )
 
 [ branch 커멘드 ]
 	branch name 변경
 
 
-모바일에서 수정
-
  ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ
- 
+
