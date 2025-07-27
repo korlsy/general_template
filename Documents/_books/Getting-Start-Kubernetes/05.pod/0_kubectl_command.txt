@@ -1,4 +1,5 @@
-
+	ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ
+	kubectl config --help
 	ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ
 	파드 정보
 		kubectl get pods
@@ -32,3 +33,5 @@
 		kubectl exec -it redis -- redis-cli
 		kubectl exec -it redis -c redis -- redis-cli
 	
+		# 이미지 생성과 동시에 bash 진입.
+		kubectl run test1 --image=centos:7 -it /bin/bash
