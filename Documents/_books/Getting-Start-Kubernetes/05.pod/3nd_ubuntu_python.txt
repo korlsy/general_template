@@ -15,3 +15,4 @@
 	
 	
 	k run ubuntu-python --image=ubuntu-python/test1 --image-pull-policy=Never
+	

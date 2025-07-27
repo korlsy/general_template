@@ -9,6 +9,10 @@
 	
 	+ git
 	+ bitbucket
-	+ python
+	+ python (every day R&D)
+	
+	docker
+	minikube
+	
 
 	
