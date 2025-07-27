@@ -1,5 +1,5 @@
 
-[ datalake ]
+[ datalake - tech (기술) ]
 	+ jenkins
 	+ helm
 	+ argocd

@@ -1,5 +1,5 @@
 
-
+minikube 환경 정리.
 ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ
 	minikube 환경의 docker 설정.
 		eval $(minikube -p minikube docker-env)
