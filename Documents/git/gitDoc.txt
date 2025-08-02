@@ -16,6 +16,7 @@
 	(원격 저장소 연결)
 	[옵션 : git branch -M main]
 	git remote add origin https://github.com/korlsy/general_template.git
+	git remote add origin https://github.com/korlsy/fastapi_k8s.git
 	git remote -v
 	git push origin HEAD:main (git push origin main)
 	( git push -u origin main : 업스트림 설정)
