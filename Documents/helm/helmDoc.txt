@@ -1,4 +1,10 @@
 ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ	
+	[helm chart 생성 - fastapi]
+		helm create myfastapi
+		helm lint myfastapi/
+		helm package myfastapi
+		
+		
 	[helm chart 생성 (create)]
 			helm create mynginx
 s			tree mynginx/
@@ -33,7 +39,6 @@ s			tree mynginx/
 ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ	
 #!/bin/sh
 
-	#rm /home/sangyeol/.cache/helm/repository/my-helm-repo-*
 	helm package mynginx
 	helm repo index .
 	git add .;git commit -m "auto_push_from_bash";git push
