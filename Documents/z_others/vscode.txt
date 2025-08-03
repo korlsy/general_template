@@ -1,0 +1,8 @@
+
+settings.json  [ (단축키: Ctrl+Shift+P → Preferences: Open Settings (JSON) 입력) ]
+	"yaml.validate": false,
+
+
+-------------------------------------
+단축키 : ctrl+shift+k
+	

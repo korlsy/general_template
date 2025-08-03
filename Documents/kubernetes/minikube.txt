@@ -1,0 +1,44 @@
+
+
+
+multi node 적용 (굳이 할 필요없음)
+
+	[ ~/start_minikube.sh ]
+		#!/bin/sh
+		minikube start \
+		--driver=docker \
+		--nodes=3 \
+		--profile=lsy-cluster
+		
+					# k get nodes -o wide
+					[calico 설치 및 시작옵션 적용.]
+					kubectl apply -f https://docs.projectcalico.org/manifests/calico.yaml
+					[minikube 시작옵션 추가.]
+						--network-plugin=cni --cni=calico \
+					
+					# stop option.
+					# minikube stop --all
+					
+					#minikube start --driver=docker --force
+					
+					#--cpus=6 \
+					#--memory=4096mb \
+	[ node info ]			
+		minikube status -p lsy-cluster
+		
+	[리소스 설정]
+	vi ~/.minikube/config/config.json
+		{"cpus":"2", "memory":"6g"}
+		
+	[ profile list]
+		minikube profile list
+-----------------------------------------------------------------------------------------------------------------
+
+	minikube 관련 설치 ( https://hyeonjh.tistory.com/124 )
+	
+		kubectl 설치
+			curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
+			chmod +x kubectl
+			sudo mv kubectl /usr/local/bin/
+			
+			kubectl version --client

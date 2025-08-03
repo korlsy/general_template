@@ -2,15 +2,32 @@ minikube 에서 argoCD 설치.
 	kubectl create namespace argocd
 	kubectl apply -n argocd -f https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml
 
+		argoCD 삭제 명령.
+			(argocd 는 설치했던 명령어인 insert에서 delete로 바꿔주면 된다)
+			$ kubectl delete -n argocd -f https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml
+			kubectl delete namespace argocd
+
+
+
 	kubectl get pods -n argocd -o wide
 	kubectl port-forward svc/argocd-server -n argocd 8080:443
 	ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ
+		admin / argocdadmin
+	ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ
 	( 비밀번호 찾기)
 	kubectl -n argocd get secret argocd-initial-admin-secret -o jsonpath="{.data.password}" | base64 -d; echo
-	초기 비번 : gH9jcPvDjlmSA0zI (argocdadmin 으로 변경)
+	초기 비번 : 1-cJon0QDyqqp-hL (argocdadmin 으로 변경)
 	★로그인 정보
 		url : localhost:8080
 		admin / argocdadmin
 	ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ
 	
-	
+				minikube 로컬 테스트 환경에서 테스트 할때
+				
+				docker images에서는 이미지가 리스팅 되고
+				argoCD에서는 못찾을때
+				
+				minikube image --help
+				minikube image load fastapi:v-1.0
+				
+				이와 같이 디버깅.	

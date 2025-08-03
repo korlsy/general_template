@@ -12,7 +12,7 @@
 		kubectl edit pod webserver
 	
 	ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ
-	파드정보 사제
+	파드정보 삭제
 		kubectl delete pod webserver
 		[kubectl delete pod webserver --all]	
 

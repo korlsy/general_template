@@ -1,0 +1,17 @@
+helm version
+----------------------
+	curl -fsSL -o get_helm.sh https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3
+	chmod +x ./get_helm.sh
+	
+	helm version
+	helm --help
+	helm repo add bitnami https://charts.bitnami.com/bitnami
+	helm repo list
+	helm search repo  nginx
+	helm show chart bitnami/nginx
+	helm inspect values bitnami/nginx
+	helm install webserver bitnami/nginx
+	helm unistall webserver
+	
+	--------------------------------
+	
