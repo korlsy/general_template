@@ -42,3 +42,9 @@ multi node 적용 (굳이 할 필요없음)
 			sudo mv kubectl /usr/local/bin/
 			
 			kubectl version --client
+-----------------------------------------------------------------------------------------
+
+	minikube image --help
+	minikube image load fastapi:latest
+	minikube image load lsy-linux/appjs:latest
+			

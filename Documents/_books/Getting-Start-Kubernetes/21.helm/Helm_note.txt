@@ -19,7 +19,7 @@ helm repo list
 
 #Repository에서 제공하는 chart 검색 : helm search repo [keyword]
 helm search repo
-helm search repo  nginx
+helm search repo nginx
 
 # chart 정보 보기 :
 #  helm show chart [CHART]
@@ -73,7 +73,7 @@ kubectl delete -f manifests/
 helm create mynginx
 tree mynginx/
 rm mynginx/templates/*.yaml mynginx/templates/{_helpers.tpl,NOTES.txt}
-rm -rf mynginx/templates/tests/
+rm -f mynginx/templates/tests/
 cp manifests/* mynginx/templates/
 vi mynginx/Chart.yaml
 ..
@@ -152,6 +152,7 @@ cat <<EOF > README.md
 Helm chart repository provided by ttabae
 
       helm repo add my-helm-repo https://237summit.github.io/my-helm-chart/
+      	> helm repo add my-helm-repo https://github.com/korlsy/my_helm_repo
       helm repo list
       helm repo update
       helm search repo mynginx
@@ -168,7 +169,9 @@ git push -u origin master
 
 #4.3 Github page 만들기
 #4.4 Helm repository  구성
-helm repo add my-helm-repo https://237summit.github.io/my-helm-repo/
+# page setting (visit site test)
+helm repo add my-helm-repo https://korlsy.github.io/my_helm_repo
+                           
 helm repo list
 helm repo update
 

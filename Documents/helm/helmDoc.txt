@@ -1,3 +1,52 @@
+ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ	
+	[helm chart 생성 (create)]
+			helm create mynginx
+s			tree mynginx/
+			rm mynginx/templates/*.yaml mynginx/templates/{_helpers.tpl,NOTES.txt}
+			rm -f mynginx/templates/tests/
+			cp manifests/* mynginx/templates/
+			vi mynginx/Chart.yaml
+			..
+			description: A halm chart for running nginx web server
+			
+			tree mynginx/
+			
+			# chart를 TEST 실행하여 오류 유무를 확인
+			# helm lint PATH [flags]
+			helm lint mynginx/
+
+
+	
+	[my github repo add]
+	
+	Github page 만들기
+	# page setting (visit site test)
+	helm repo add my-helm-repo https://korlsy.github.io/my_helm_repo
+	
+	helm repo index .
+	helm repo list
+	helm repo update
+
+
+ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ	
+	helm build & commit 
+ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ	
+#!/bin/sh
+
+	#rm /home/sangyeol/.cache/helm/repository/my-helm-repo-*
+	helm package mynginx
+	helm repo index .
+	git add .;git commit -m "auto_push_from_bash";git push
+	
+	#helm repo list
+	helm repo update my-helm-repo
+	
+	echo "search test"
+	echo "helm search repo mynginx"
+	echo "helm install webserver my-helm-repo/mynginx"	
+	
+
+
 helm version
 ----------------------
 	curl -fsSL -o get_helm.sh https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3
@@ -13,5 +62,7 @@ helm version
 	helm install webserver bitnami/nginx
 	helm unistall webserver
 	
-	--------------------------------
+	helm list : helm program install list
+
+	helm pull bitnami/nginx (helm 받아서 구조 보기)
 	
