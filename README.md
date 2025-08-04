@@ -6,3 +6,5 @@ deactivate
 
 cd /mnt/c/dev/eclipse-workspace/general_templates
 ./auto_push.sh
+
+pilot edit.
