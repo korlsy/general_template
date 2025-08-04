@@ -23,7 +23,10 @@
 	git remote add origin https://github.com/korlsy/my_helm_repo.git
 	
 	
+	
 	git remote -v
+	git remote remove origin
+	
 	git push origin HEAD:main (git push origin main)
 	( git push -u origin main : 업스트림 설정)
 			git remote -v
