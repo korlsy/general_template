@@ -1,3 +1,5 @@
 target
 classes
 my_venv
+.classpath
+.settings
