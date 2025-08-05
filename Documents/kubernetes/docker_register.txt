@@ -1,0 +1,17 @@
+minikube addons enable registry
+Registry addon with docker driver uses port 56118 please use that instead of default port 5000
+
+minikube config set insecure-registry "10.0.0.0/24"
+
+curl http://localhost:56118/v2/_catalog
+
+ 
+#https://velog.io/@star-whale/minikube%EC%97%90%EC%84%9C-private-docker-registry-%EC%84%A4%EC%B9%98-%EB%B0%8F-%ED%99%9C%EC%9A%A9%ED%95%98%EA%B8%B0
+# minikube private registry 이미지 추가
+
+kubectl get service --namespace kube-system
+
+docker build -t <registry_address>/<image_name>:<tag> .
+
+docker build -t localhsot:56118/lsy-linux/appjs .
+
