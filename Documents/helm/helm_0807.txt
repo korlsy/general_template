@@ -1,0 +1,27 @@
+
+(로컬 helm repo 만들기)
+	helm repo index . --url http://localhost:8080
+	
+	helm create mynginx (임시)
+	helm lint mynginx/
+	helm package mynginx/
+	
+	helm repo index . --url http://localhost:8080
+	python3 -m http.server 8080
+	
+	helm repo add mylocal http://localhost:8080
+	helm repo list
+	helm repo update mylocal
+
+(저장소 모든 차트 목록 조회)
+	helm search repo
+	helm search repo mylocal
+
+(helm 설치)
+	helm install local-nginx mylocal/mynginx
+
+(helm 설치 목록)
+	helm list
+
+(helm 삭제)
+	helm uninstall local-nginx

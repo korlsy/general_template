@@ -1,3 +1,7 @@
+
+
+
+
 ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ	
 	[helm chart 생성 - fastapi]
 		helm create myfastapi
@@ -7,7 +11,7 @@
 		
 	[helm chart 생성 (create)]
 			helm create mynginx
-s			tree mynginx/
+			tree mynginx/
 			rm mynginx/templates/*.yaml mynginx/templates/{_helpers.tpl,NOTES.txt}
 			rm -f mynginx/templates/tests/
 			cp manifests/* mynginx/templates/
