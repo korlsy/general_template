@@ -21,6 +21,7 @@
 	git remote add origin https://github.com/korlsy/general_template.git
 	git remote add origin https://github.com/korlsy/fastapi_k8s.git
 	git remote add origin https://github.com/korlsy/my_helm_repo.git
+	git remote add origin https://github.com/korlsy/k8s_extra.git
 	
 	
 	
