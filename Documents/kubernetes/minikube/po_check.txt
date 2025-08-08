@@ -1,0 +1,3 @@
+
+> 쉘 스크립트로 카운트 0 일때 정상으로 해서 다음 스크립트 실행하도록 개발.
+	kubectl get po -n argocd|grep "argocd-"|egrep -v "Running"
