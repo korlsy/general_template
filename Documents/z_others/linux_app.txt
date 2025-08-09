@@ -1,0 +1,6 @@
+-bash: ./build.sh: cannot execute: required file not found
+윈도우에서 만든 파일이 리눅스에서 실행 안될때.
+	# dos2unix 설치
+	sudo apt install dos2unix
+	# 변환
+	dos2unix build.sh
