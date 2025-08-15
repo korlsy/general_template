@@ -4,6 +4,8 @@ APP=${1:?Usage: $0 <app-name>}
 NS=${2:-argocd}
 MODE=${3:-keep}  # keep(리소스 보존) | purge(리소스까지 삭제)
 
+argocd login localhost:8080 --username=admin --password=argocdadmin --insecure
+
 # 1) 백업
 kubectl get application "$APP" -n "$NS" -o yaml > "app-$APP.full.yaml"
 yq '
@@ -27,5 +29,7 @@ else
   echo "[WARN] Deleting Application AND its resources"
   argocd app delete "$APP" --cascade=true --yes || kubectl delete application "$APP" -n "$NS"
 fi
+
+argocd logout localhost:8080
 
 echo "[INFO] Application deleted. To restore: kubectl apply -f app-$APP.restore.yaml && argocd app sync $APP"

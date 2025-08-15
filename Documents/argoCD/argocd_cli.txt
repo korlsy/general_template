@@ -4,3 +4,7 @@ sudo install -m 555 argocd-linux-amd64 /usr/local/bin/argocd
 
 argocd login localhost:8080 --insecure
 argocd app get guest-book -o yaml > app-guest-book.yaml
+ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ
+
+ argocd login localhost:8080 --username=admin --password=argocdadmin --insecure
+argocd logout localhost:8080
