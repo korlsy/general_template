@@ -1,0 +1,27 @@
+
+# Linux (64-bit)
+wget https://github.com/mikefarah/yq/releases/latest/download/yq_linux_amd64 -O /usr/local/bin/yq
+chmod +x /usr/local/bin/yq
+
+# 확인
+yq --version
+
+
+# YAML 값 읽기
+yq '.spec.template.spec.containers[0].image' deployment.yaml
+
+# 값 수정 (in-place)
+yq -i '.spec.replicas = 5' deployment.yaml
+
+# JSON으로 변환
+yq -o=json '.' file.yaml
+
+# 여러 YAML 파일 병합
+yq eval-all '. as $item ireduce ({}; . * $item)' file1.yaml file2.yaml
+
+# yaml edit.
+yq '
+  del(.status) |
+  del(.metadata.uid, .metadata.resourceVersion, .metadata.generation, .metadata.creationTimestamp, .metadata.managedFields, .metadata.annotations."kubectl.kubernetes.io/last-applied-configuration") |
+  .metadata |= (.name="'"$APP"'" | .namespace="'"$NS"'")
+' "app-$APP.full.yaml" > "app-$APP.restore.yaml"

@@ -1,0 +1,10 @@
+
+	kubectl get ns argocd >/dev/null 2>&1 || kubectl create ns argocd
+		정상적으로 네임스페이스가 존재하면 exit code 0
+		없거나 오류면 exit code ≠ 0
+		
+		exit code가 0이 아니면 kubectl create ns argocd 실행
+		[동일 의미]
+		if ! kubectl get ns argocd >/dev/null 2>&1; then
+		    kubectl create ns argocd
+		fi		
