@@ -6,5 +6,6 @@
 	hint: the same ref. If you want to integrate the remote changes, use
 	hint: 'git pull' before pushing again.
 	hint: See the 'Note about fast-forwards' in 'git push --help' for details.
-	
+ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ
+pull 없이 작업하다가 push 안될때, 
 git pull origin main
