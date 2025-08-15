@@ -6,7 +6,8 @@
 set -u
 set -o pipefail
 
-NS="${1:-argocd}" # 첫 번째 인자로 네임스페이스 받음. 기본값 argocd
+#NS="${1:-argocd}" # 첫 번째 인자로 네임스페이스 받음. 기본값 argocd
+NS="argocd"
 TIMEOUT=600     # 전체 대기 한도(초)
 INTERVAL=5      # 루프 간격(초)
 POST_CMD=""
