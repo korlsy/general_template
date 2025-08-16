@@ -1,0 +1,7 @@
+✅ argoCD application 조회
+	👉 k api-resources|grep "app"
+	👉 k get app -n argocd
+	👉 k get app simple-hooks-v2 -n argocd -o yaml
+	👉 k describe app simple-hooks-v2 -n argocd
+
+	
