@@ -1,0 +1,22 @@
+1) 왜 안 없어지는지 확인
+	# Job의 상태/파이널라이저/훅 어노테이션 확인
+	kubectl get job hooks-v2-presync -n default -o yaml | sed -n '1,120p'
+	
+	# 관련 파드가 남아있는지 확인
+	kubectl get pod -n default -l job-name=hooks-v2-presync -o wide
+	
+	# 이벤트도 한 번
+	kubectl get events -n default --sort-by=.lastTimestamp | tail -n 50
+
+
+2) finalizer 걸림일 때 강제 해제
+주의: 진짜 안 없어질 때만 사용하세요.
+
+	# 파드 먼저 강제 제거
+	kubectl delete pod -n default -l job-name=hooks-v2-presync --force --grace-period=0
+	
+	# Job의 finalizer 제거
+	kubectl patch job hooks-v2-presync -n default --type=merge -p '{"metadata":{"finalizers":null}}'
+	
+	# 그래도 보이면 한 번 더 삭제 시도
+	kubectl delete job hooks-v2-presync -n default --force --grace-period=0
