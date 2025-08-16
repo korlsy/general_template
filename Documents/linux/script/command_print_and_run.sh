@@ -1,30 +1,18 @@
-### [ simple-hooks-script-map ]
-	
-helm create hooks-v2
+#!/bin/bash
+CMD="kubectl get app -n argocd -o wide"
 
-helm package hooks-v2/
+print_title () {
+  local text=" $1 "
+  local width=100
+  local pad=$(( (width - ${#text}) / 2 ))
+  printf '=%.0s' $(seq 1 $pad)
+  printf "%s" "$text"
+  printf '=%.0s' $(seq 1 $((width - pad - ${#text})))
+  echo
+}
 
-helm repo index .
+print_title "명령"
+echo "$CMD"
 
-helm repo list
-
-helm repo update my-helm-repo
-
-helm search repo my-helm-repo
-
-kubectl create ns demo
-
-helm install simple-hooks-script-map my-helm-repo/simple-hooks-script-map -n demo 
-	[helm install simple-hooks-script-map ./simple-hooks-script-map -n demo]
-	
-helm uninstall simple-hooks-script-map -n demo
-
----
-### deploy
-rm -f ./hooks-v2-*tgz;helm package hooks-v2/;helm repo index .;
-
-git add .;git commit -m "c";git push
-
-helm repo update my-helm-repo;helm search repo my-helm-repo
-
-
+print_title "결과"
+eval "$CMD"
