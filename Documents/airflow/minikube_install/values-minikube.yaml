@@ -1,0 +1,21 @@
+# 실행기: Minikube면 LocalExecutor가 간단
+executor: LocalExecutor
+
+# Airflow 컨테이너 공통 환경변수: 배열로 넣고 싶으면 env: 사용
+env:
+  - name: AIRFLOW__CORE__LOAD_EXAMPLES
+    value: "True"
+
+# 웹서버를 NodePort로 노출
+webserver:
+  service:
+    type: NodePort
+    ports:
+      - name: airflow-ui
+        port: 8080          # 서비스 포트 (원하는 외부 포트 아님)
+        targetPort: airflow-ui
+        nodePort: 30080     # 실제 노드의 포트 (30000-32767 범위)
+
+# (주의) workers.enabled 같은 키는 제거하세요
+# workers:
+#   enabled: false   # <-- 공식 차트에 없음, 지우기
