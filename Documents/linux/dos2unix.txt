@@ -1,0 +1,18 @@
+✅ 1. dos2unix 사용 (가장 편리)
+  👉 dos2unix script.sh
+  👉 대부분 리눅스 배포판에 패키지 있음 (apt install dos2unix / yum install dos2unix).
+
+  ✔ 파일 전체 개행문자를 한 번에 LF로 변환.
+
+✅ 2. sed 한 줄 변환
+  👉 sed -i 's/\r$//' script.sh
+  ✔ \r(CR)을 제거해서 LF만 남깁니다.
+
+설치 필요 없음, 기본 sed로 바로 가능.
+
+✅ 3. vim/vi에서 수정
+  👉 :set ff=unix
+  ✔ :wq
+
+  ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ
+  윈도우 개행 문자 제거.
