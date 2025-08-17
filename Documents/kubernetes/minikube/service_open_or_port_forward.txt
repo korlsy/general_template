@@ -1,3 +1,8 @@
 
-> 쉘 스크립트로 카운트 0 일때 정상으로 해서 다음 스크립트 실행하도록 개발.
-	kubectl get po -n argocd|grep "argocd-"|egrep -v "Running"
+	
+✅ 로컬 브라우저로 바로 보고 싶으면(둘 중 택1) .......................... 모두 접속 test ok
+ [service 사용할때]
+ 👉 minikube service guestbook-ui --url
+ or
+  👉 kubectl port-forward deploy/etc-guestbook-ui-deployment 8088:8080 
+  👉 http://localhost:8088
