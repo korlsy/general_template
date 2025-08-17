@@ -1,0 +1,11 @@
+
+✅ Pod 이름 잡기 (라벨 기준)
+  👉 POD=$(kubectl get po -l app=guestbook-ui -o jsonpath='{.items[0].metadata.name}')
+    ✔  etc-guestbook-ui-deployment-5ff4b6dc88-88j52
+
+✅ 파드에 에페멀(ephemeral) 컨테이너 붙여서 바로 요청 보내기
+kubectl debug -it pod/$POD \
+  --image=curlimages/curl:8.8.0 \
+  --profile=general \
+  --target=c-etc-guestbook-ui -- \
+  sh -lc 'curl -I http://127.0.0.1:8080'
