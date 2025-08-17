@@ -49,5 +49,11 @@
 	✔ .dockerignore 사용: 불필요한 파일이 이미지에 복사되는 걸 방지
 	✔ 명령 순서 최적화: 자주 바뀌는 파일은 Dockerfile 하단에 배치
 
+👉 기타.
+	docker run -d--name my_smlinux -p 8082:8080 smlinux/genid:env
 	
-	
+	docker ps
+	docker ps|grep smlinux
+	docker stop $(cid)
+	docker rm $(cid)
+	docker exec -it <컨테이너ID> bash
