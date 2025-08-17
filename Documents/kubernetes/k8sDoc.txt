@@ -1,4 +1,14 @@
 
 
-patch example.
-	kubectl patch svc argocd-server -n argocd -p '{"spec": {"type": "ClusterIP"}}'
+
+✅ 리소스 삭제 (테스트 사용, delete default namespace)
+  👉 kubectl delete pod --all -n default	
+  👉 kubectl delete deployments --all -n default	
+  👉 kubectl delete svc --all -n default	
+  ✔ kubectl delete all --all -n default	
+
+
+  
+✅ patch example.
+  👉 kubectl patch svc argocd-server -n argocd -p '{"spec": {"type": "ClusterIP"}}'
+  
