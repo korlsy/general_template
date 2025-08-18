@@ -1,37 +1,36 @@
 
+✅ 새 브랜치 만들고 그 브랜치로 바로 이동
+ 👉 git checkout -b pilot
+ 👉 git push --set-upstream origin pilot
+    ✔ n/a
+    
+✅ 현재의 branch
+ 👉 git status, git branch
 
-git checkout -b pilot
-git push --set-upstream origin pilot
+✅ 원격 저장소(remote)의 pilot 브랜치 내용을 현재 네가 있는 브랜치에 합치는 것
+   👉 git merge origin/pilot
+      ✔ git pull origin pilot 이랑 거의 같아
 
-#current branch check
-git status, git branch
-
-git merge origin/pilot
-
-
-ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ
-git branch feature/login
-현재 브랜치는 그대로 유지되고, feature/login이라는 브랜치가 생성만 됩니다.
-
-ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ
-최신 방식 (Git 2.23 이상부터)
-git switch -c 새브랜치이름
-checkout보다 명확한 문법이라 최근에는 switch 사용이 권장됩니다.
-
-ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ
+✅ 현재 브랜치는 그대로 유지되고, feature/login이라는 브랜치가 생성만 됩니다.
+ 👉 git branch feature/login
 
 
-원격에서 브랜치 생성.
-git checkout -b 새브랜치이름 origin/기존원격브랜치
+✅ git switch -c 새브랜치이름 [ 최신 방식 (Git 2.23 이상부터) ]
+  👉 checkout보다 명확한 문법이라 최근에는 switch 사용이 권장됩니다.
 
-git 브랜치 변경
-  git switch stg
+✅ 원격에서 브랜치 생성.
+  👉 git checkout -b 새브랜치이름 origin/기존원격브랜치
 
-브랜치 생성
-git branch dev
+	✅ 브랜치 생성
+	  👉 git branch dev
 
-로컬에서 만든 브랜치 원격에 적용
-git push origin dev
+
+✅ git 브랜치 변경
+  👉 git switch stg
+
+
+✅ 로컬에서 만든 브랜치 원격에 적용
+  👉git push origin dev
 
 
 

@@ -1,3 +1,7 @@
-git config --global commit.template ~/.gitmessage.txt
 
-git config --global alias.ct '!git add -A && git commit -m "auto-commit-message" && git push'
+✅ 커밋 메시지 자동 설정.
+  👉 git config --global commit.template ~/.gitmessage.txt
+
+✅ git alias 적용
+  👉 git config --global alias.ct '!git add -A && git commit -m "auto-commit-message" && git push'
+    ✔ git bash 에서 설정.
