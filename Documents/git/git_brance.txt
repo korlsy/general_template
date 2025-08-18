@@ -22,3 +22,6 @@ checkout보다 명확한 문법이라 최근에는 switch 사용이 권장됩니
 
 원격에서 브랜치 생성.
 git checkout -b 새브랜치이름 origin/기존원격브랜치
+
+git btanch 변경
+  git switch stg
