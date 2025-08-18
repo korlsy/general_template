@@ -8,6 +8,7 @@ git status, git branch
 
 git merge origin/pilot
 
+
 ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ
 git branch feature/login
 현재 브랜치는 그대로 유지되고, feature/login이라는 브랜치가 생성만 됩니다.
