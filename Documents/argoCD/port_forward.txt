@@ -7,6 +7,7 @@ if [ $STS -gt 0 ]; then
     exit $?
 fi
 
+# --address 0.0.0.0 이렇게 사용(airflow에서는)
 /usr/bin/nohup \
 kubectl port-forward svc/argocd-server -n argocd 8080:443 \
 >/dev/null 2>&1 &
