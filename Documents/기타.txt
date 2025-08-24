@@ -1,0 +1,26 @@
+# hynix.dlk
+
+<NotepadPlus>
+    <Project name="&#xC5C5;&#xBB34;">
+        <Folder name="&#xC791;&#xC5C5;-Airflow">
+            <Folder name="GaiA-dev" />
+            <Folder name="GaiA-stg" />
+            <Folder name="GaiA-prod" />
+        </Folder>
+        <Folder name="&#xC791;&#xC5C5;-Starrocks">
+            <Folder name="gaia-dev" />
+        </Folder>
+        <Folder name="&#xC791;&#xC5C5;-Grafana" />
+        <Folder name="&#xAE30;&#xD0C0;" />
+        <Folder name="&#xC5C5;&#xBB34;&#xAE30;&#xB85D;" />
+    </Project>
+    <Project name="&#xBA54;&#xB274;&#xC5BC;">
+        <Folder name="&#xC0AC;&#xC774;&#xD2B8;.&#xC778;&#xC99D;" />
+        <Folder name="Tech">
+            <Folder name="kubernetes" />
+            <Folder name="minio" />
+            <Folder name="starrocks" />
+        </Folder>
+        <Folder name="&#xAE30;&#xD0C0;" />
+    </Project>
+</NotepadPlus>
