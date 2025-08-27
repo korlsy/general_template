@@ -1,26 +1,8 @@
-# hynix.dlk
+맞아요. 뿌리는 ReplicaSet이에요.
 
-<NotepadPlus>
-    <Project name="&#xC5C5;&#xBB34;">
-        <Folder name="&#xC791;&#xC5C5;-Airflow">
-            <Folder name="GaiA-dev" />
-            <Folder name="GaiA-stg" />
-            <Folder name="GaiA-prod" />
-        </Folder>
-        <Folder name="&#xC791;&#xC5C5;-Starrocks">
-            <Folder name="gaia-dev" />
-        </Folder>
-        <Folder name="&#xC791;&#xC5C5;-Grafana" />
-        <Folder name="&#xAE30;&#xD0C0;" />
-        <Folder name="&#xC5C5;&#xBB34;&#xAE30;&#xB85D;" />
-    </Project>
-    <Project name="&#xBA54;&#xB274;&#xC5BC;">
-        <Folder name="&#xC0AC;&#xC774;&#xD2B8;.&#xC778;&#xC99D;" />
-        <Folder name="Tech">
-            <Folder name="kubernetes" />
-            <Folder name="minio" />
-            <Folder name="starrocks" />
-        </Folder>
-        <Folder name="&#xAE30;&#xD0C0;" />
-    </Project>
-</NotepadPlus>
+Deployment도, StatefulSet도, DaemonSet도 결국 파드를 여러 개 유지하려면 내부에서 ReplicaSet과 비슷한 로직을 씁니다. Deployment는 새 버전이 뜨면 새 ReplicaSet을 만들고 옛 ReplicaSet을 줄이는 식으로 굴리고, StatefulSet은 파드 이름과 스토리지를 붙여서 ReplicaSet 성격을 살짝 변형한 거죠.
+
+즉, ReplicaSet은 파드 수 유지라는 가장 기본 기능이고, 그 위에 “버전 관리”나 “상태 유지”, “노드별 1개” 같은 룰을 덧씌운 게 다른 컨트롤러들이에요.
+
+혹시 내부 구조가 궁금해서 흐름도를 보고 싶은 건가요, 아니면 코드 레벨로 “Deployment → ReplicaSet → Pod”로 이어지는 실제 리소스 관계를 보고 싶은 건가요?
+
