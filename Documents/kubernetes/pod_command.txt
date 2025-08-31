@@ -1,0 +1,20 @@
+
+📘 POD command.
+    🛠 minikube ssh 로 접속해서 curl localhost:80 테스트.
+        또는 kubectl port-forward pod/파드이름 8080:80 → 로컬 8080에서 파드 80으로 연결.
+    
+        kubectl port-forward web1 8888:80
+        
+    🚀 kubectl run web1 --image=nginx:latest --port=80
+        == yaml.
+            apiVersion: v1
+            kind: Pod
+            metadata:
+              name: nginx-pod
+            spec:
+              containers:
+              - name: nginx-container
+                image: nginx:latest
+                ports:
+                - containerPort: 80
+                  protocol: TCP    
