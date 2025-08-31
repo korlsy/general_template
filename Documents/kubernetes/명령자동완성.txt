@@ -1,0 +1,9 @@
+source <(kubectl completion bash)
+echo "source <(kubectl completion bash)" >> ~/.bashrc
+
+
+if [ -f ~/.bashrc ]; then
+  . ~/.bashrc
+fi
+
+.bashrc 에 추가.
