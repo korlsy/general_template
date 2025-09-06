@@ -1,0 +1,44 @@
+
+#!/bin/sh
+# 18080 port
+# other run : docker-compose up
+# = log tail =
+# docker logs -f airflow-standalone
+#
+# = stop service =
+# docker stop airflow-standalone
+# docker start airflow-standalone
+#
+# = user list =
+# docker exec -it airflow-standalone airflow users list
+#
+# = password update =
+# docker exec -it airflow-standalone airflow users reset-password --username admin
+#
+# = 모든 종료된 컨테이너 제거 =
+# docker container prune -f
+#
+# --rm : 계정 , 실행이력 모두 없어짐.
+#
+# health check. ( 컨테이너 내부에서 웹서버 헬스 확인 )
+# docker exec -it airflow-standalone curl -sS http://localhost:8080/health
+
+#docker rm -f airflow-standalone
+
+docker run -d --name airflow-standalone \
+  -p 18080:8080 \
+  -v "$PWD/dags:/opt/airflow/dags" \
+  -e AIRFLOW__CORE__LOAD_EXAMPLES=False \
+  -e AIRFLOW__CORE__PARALLELISM=2 \
+  -e AIRFLOW__CORE__DAG_CONCURRENCY=2 \
+  -e AIRFLOW__SCHEDULER__MAX_DAGRUNS_TO_CREATE_PER_LOOP=1 \
+  -e AIRFLOW__WEBSERVER__EXPOSE_CONFIG=True \
+  --memory="2g" --cpus="2" \
+  apache/airflow:2.9.2-python3.11 \
+  bash -lc "airflow standalone"
+
+sleep 3
+echo "docker logs -f airflow-standalone"
+docker logs -f airflow-standalone
+
+===========================================================================
