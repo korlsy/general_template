@@ -36,6 +36,7 @@ __default_confirm() {
     y|Y|yes|YES) return 0 ;;
     *)
       log "사용자 취소"
+      #return 1 
       exit 0 
       ;;
   esac

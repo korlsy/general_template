@@ -14,7 +14,11 @@ EOF
 }
 
 action_exec() {
-  confirm "confirm?" || return 1
+  # case 1
+  confirm "confirm?"
+  
+  # case 2
+  #confirm "confirm?" || return 1
 
   echo "exec-run2"
   log "test200" 
