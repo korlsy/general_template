@@ -1,0 +1,37 @@
+#!/usr/bin/env bash
+#set -euo pipefail
+
+dir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+source "${dir}/base.sh"
+
+usage() {
+  cat <<'EOF'
+Usage:
+  ./sample_task.sh -action <exec|clean> [-target <path>]
+Options:
+  --log-file <path>  --yes -h/--help
+EOF
+}
+
+action_exec() {
+
+  #hydrate_opts_to_vars
+
+
+  foo="$(get_opt foo "default-foo")" 
+
+	log "foo : $foo"
+
+  confirm "confirm?" 
+
+  #confirm "confirm?" || return 1
+  #
+
+  echo "exec-run2"
+  log "test200" 
+  return 0
+}
+action_clean()  { :; }
+
+run "$@"
+
