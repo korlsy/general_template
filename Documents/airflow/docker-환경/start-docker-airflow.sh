@@ -1,5 +1,12 @@
 #!/bin/sh
+#
+# home path : /root/airflow-docker/start.sh
+# 
 set -eu
+
+
+# 속편하게 지우고 시작하는게 추천. (dag 만 보존, db는 날라감.)
+docker rm -f airflow-standalone
 
 NAME=${NAME:-airflow-standalone}
 IMAGE=${IMAGE:-apache/airflow:2.9.2-python3.11}
