@@ -1,0 +1,4 @@
+
+kubectl get $(kubectl api-resources --namespaced=true -o name | tr '\n' ',' | sed 's/,$//') -n postgresql
+
+kubectl get all,configmap,secret,pvc,ingress,job,cronjob -n postgresql
