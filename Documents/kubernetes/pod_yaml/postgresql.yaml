@@ -1,0 +1,149 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: postgresql
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: postgresql-secret
+  namespace: postgresql
+type: Opaque
+data:
+  POSTGRES_PASSWORD: Y2hhbmdlLW1lLXN0cm9uZyE=
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: postgresql-config
+  namespace: postgresql
+data:
+  pg_hba.conf: |
+    # TYPE  DATABASE        USER            ADDRESS                 METHOD
+    local   all             all                                     peer
+    host    all             all             127.0.0.1/32            scram-sha-256
+    host    all             all             10.0.0.0/8              scram-sha-256
+    host    all             all             ::1/128                  scram-sha-256
+  postgresql.conf: |
+    listen_addresses = '*'
+    password_encryption = 'scram-sha-256'
+    shared_buffers = '256MB'
+    max_connections = 100
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: postgresql-data
+  namespace: postgresql
+spec:
+  accessModes: [ReadWriteOnce]
+  resources:
+    requests:
+      storage: 5Gi
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: postgresql
+  namespace: postgresql
+spec:
+  type: ClusterIP
+  selector:
+    app: postgresql
+  ports:
+    - name: postgres
+      port: 5432
+      targetPort: 5432
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: postgresql
+  namespace: postgresql
+  labels:
+    app: postgresql
+spec:
+  # PVC 권한을 먼저 맞추는 initContainer (root로 실행)
+  initContainers:
+    - name: volume-permissions
+      image: postgres:16
+      command:
+        - bash
+        - -lc
+        - |
+          set -eux
+          mkdir -p /var/lib/postgresql/data
+          chown -R 999:999 /var/lib/postgresql/data
+          chmod 700 /var/lib/postgresql/data || true
+      securityContext:
+        runAsUser: 0
+        runAsGroup: 0
+      volumeMounts:
+        - name: data
+          mountPath: /var/lib/postgresql/data
+
+  # 메인 컨테이너는 비-root(999)로 실행
+  securityContext:
+    fsGroup: 999
+    runAsUser: 999
+    runAsGroup: 999
+
+  containers:
+    - name: postgresql
+      image: postgres:16
+      imagePullPolicy: IfNotPresent
+      args:
+        - "-c"
+        - "config_file=/etc/postgresql-conf/postgresql.conf"
+        - "-c"
+        - "hba_file=/etc/postgresql-conf/pg_hba.conf"
+      env:
+        - name: POSTGRES_USER
+          value: postgres
+        - name: POSTGRES_DB
+          value: postgres
+        - name: POSTGRES_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: postgresql-secret
+              key: POSTGRES_PASSWORD
+      ports:
+        - containerPort: 5432
+          name: postgres
+      volumeMounts:
+        - name: data
+          mountPath: /var/lib/postgresql/data
+        - name: conf
+          mountPath: /etc/postgresql-conf
+          readOnly: true
+      readinessProbe:
+        exec:
+          command: ["bash", "-lc", "pg_isready -U postgres -h 127.0.0.1 -p 5432"]
+        initialDelaySeconds: 10
+        periodSeconds: 5
+        timeoutSeconds: 3
+      livenessProbe:
+        exec:
+          command: ["bash", "-lc", "pg_isready -U postgres -h 127.0.0.1 -p 5432"]
+        initialDelaySeconds: 20
+        periodSeconds: 10
+        timeoutSeconds: 3
+      resources:
+        requests:
+          cpu: "100m"
+          memory: "256Mi"
+        limits:
+          cpu: "500m"
+          memory: "1Gi"
+  volumes:
+    - name: data
+      persistentVolumeClaim:
+        claimName: postgresql-data
+    - name: conf
+      configMap:
+        name: postgresql-config
+        items:
+          - key: pg_hba.conf
+            path: pg_hba.conf
+          - key: postgresql.conf
+            path: postgresql.conf
