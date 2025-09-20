@@ -1,4 +1,10 @@
 
+=============================
+docker exec -it airflow-standalone bash
+# 도커의 호스트에 접속.
+    nc -zv host.docker.internal
+==============================
+
 #!/bin/sh
 # 18080 port
 # other run : docker-compose up
