@@ -1,0 +1,167 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: mysql
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: mysql-secret
+  namespace: mysql
+type: Opaque
+stringData:
+  MYSQL_ROOT_PASSWORD: "lsy"
+  MYSQL_USER: "lsy"
+  MYSQL_PASSWORD: "lsy"
+  MYSQL_DATABASE: "lsy"
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: mysql-config
+  namespace: mysql
+data:
+  custom.cnf: |
+    [mysqld]
+    character-set-server = utf8mb4
+    collation-server     = utf8mb4_general_ci
+    slow_query_log = 1
+    long_query_time = 2
+---
+# (선택) 최초 초기화 시 한 번만 실행될 SQL
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: mysql-initdb
+  namespace: mysql
+data:
+  001-auth.sql: |
+    -- 필요할 때에만 사용하세요. (mysql_native_password가 꼭 필요한 클라이언트용)
+    ALTER USER 'pdpdev'@'%' IDENTIFIED WITH mysql_native_password BY 'pdpdev';
+    -- root도 바꾸고 싶다면 주석 해제:
+    -- ALTER USER 'root'@'%' IDENTIFIED WITH mysql_native_password BY 'change-me-strong!';
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: mysql-data
+  namespace: mysql
+spec:
+  accessModes: ["ReadWriteOnce"]
+  resources:
+    requests:
+      storage: 5Gi
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: mysql
+  namespace: mysql
+  labels:
+    app: mysql
+spec:
+  type: ClusterIP
+  selector:
+    app: mysql
+  ports:
+    - name: mysql
+      port: 3306
+      targetPort: 3306
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: mysql
+  namespace: mysql
+  labels:
+    app: mysql
+spec:
+  securityContext:
+    fsGroup: 999
+  initContainers:
+    - name: init-perms
+      image: busybox:1.36
+      command: ["sh","-c"]
+      args:
+        - |
+          set -e
+          mkdir -p /mnt/data/data
+          chown -R 999:999 /mnt/data
+      volumeMounts:
+        - name: data
+          mountPath: /mnt/data
+  containers:
+    - name: mysql
+      image: mysql:8.4
+      imagePullPolicy: IfNotPresent
+      ports:
+        - containerPort: 3306
+          name: mysql
+      env:
+        - name: MYSQL_ROOT_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: mysql-secret
+              key: MYSQL_ROOT_PASSWORD
+        - name: MYSQL_USER
+          valueFrom:
+            secretKeyRef:
+              name: mysql-secret
+              key: MYSQL_USER
+        - name: MYSQL_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: mysql-secret
+              key: MYSQL_PASSWORD
+        - name: MYSQL_DATABASE
+          valueFrom:
+            secretKeyRef:
+              name: mysql-secret
+              key: MYSQL_DATABASE
+      volumeMounts:
+        - name: data
+          mountPath: /var/lib/mysql
+          subPath: data
+        - name: config
+          mountPath: /etc/mysql/conf.d/custom.cnf
+          subPath: custom.cnf
+        - name: initdb
+          mountPath: /docker-entrypoint-initdb.d
+      resources:
+        requests:
+          cpu: "250m"
+          memory: "512Mi"
+        limits:
+          cpu: "1"
+          memory: "1Gi"
+      readinessProbe:
+        exec:
+          command: ["sh","-c","mysqladmin ping -u root -p$MYSQL_ROOT_PASSWORD"]
+        initialDelaySeconds: 15
+        periodSeconds: 5
+        timeoutSeconds: 3
+        failureThreshold: 12
+      livenessProbe:
+        exec:
+          command: ["sh","-c","mysqladmin ping -u root -p$MYSQL_ROOT_PASSWORD || exit 1"]
+        initialDelaySeconds: 30
+        periodSeconds: 10
+        timeoutSeconds: 5
+        failureThreshold: 6
+      startupProbe:
+        exec:
+          command: ["sh","-c","mysqladmin ping -u root -p$MYSQL_ROOT_PASSWORD"]
+        initialDelaySeconds: 10
+        periodSeconds: 10
+        failureThreshold: 40
+  volumes:
+    - name: data
+      persistentVolumeClaim:
+        claimName: mysql-data
+    - name: config
+      configMap:
+        name: mysql-config
+    - name: initdb
+      configMap:
+        name: mysql-initdb
+  terminationGracePeriodSeconds: 30

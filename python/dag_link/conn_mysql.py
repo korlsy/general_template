@@ -20,7 +20,8 @@ def check_port(ip, port, timeout=3):
     
 
 def hello(name: str = "world", **context):
-
+    logging.info("begin hello, %s!", "first")
+    
     if check_port("host.docker.internal", 3307):
         print("접속 가능_ok!!!")
     else:
@@ -41,15 +42,18 @@ def hello(name: str = "world", **context):
             cur.execute("SHOW TABLES")
             tables = cur.fetchall()
             print(f"테이블 목록: {tables}")
+        
+            for row in tables:
+                # row는 ('table_name',) 같은 형태
+                print(f"-table.name : {row[0]}")
+            
+            # return {
+            #     "select_1": result,
+            #     "tables": tables
+            # }
 
-            return {
-                "select_1": result,
-                "tables": tables
-            }
-
-
-    logging.info("👋 Hello, %s!", name)
-    # XCom 예시: return 값은 자동으로 XCom으로 저장됩니다.
+    logging.info("Hello, %s!", name)
+    # return 값은 자동으로 XCom으로 저장
     return {"greeted": name}
 
 with DAG(
@@ -68,7 +72,7 @@ with DAG(
     say_hello = PythonOperator(
         task_id="say_hello",
         python_callable=hello,
-        op_kwargs={"name": "Airflow"},
+        op_kwargs={"name": "Nice-Airflow"},
     )
 
     say_hello
