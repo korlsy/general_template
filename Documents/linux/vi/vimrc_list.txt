@@ -1,0 +1,13 @@
+
+
+-------------------------------------------------------------------------------
+highlight Comment term=bold ctermfg=2
+set nu
+set ts=4              " tab width = 4
+set expandtab         " 탭 대신 스페이스 사용
+set shiftwidth=4      " 자동 들여쓰기 공백 수
+set softtabstop=4     " <Tab>/<BS> 동작 시 공백 수
+highlight Comment term=bold ctermfg=2
+highlight LineNr term=bold ctermfg=7
+
+-------------------------------------------------------------------------------

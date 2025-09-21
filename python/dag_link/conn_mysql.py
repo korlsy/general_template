@@ -6,10 +6,12 @@ import pendulum
 from airflow import DAG
 from airflow.operators.python import PythonOperator
 
-import socket
+from airflow.providers.mysql.hooks.mysql import MySqlHook
 
+CONN_ID = "airflow_mysql_db" 
 
 def check_port(ip, port, timeout=3):
+    import socket
     try:
         with socket.create_connection((ip, port), timeout=timeout):
             return True
@@ -19,10 +21,31 @@ def check_port(ip, port, timeout=3):
 
 def hello(name: str = "world", **context):
 
-    if check_port("host.docker.internal", 5433):
+    if check_port("host.docker.internal", 3307):
         print("접속 가능_ok!!!")
     else:
         print("방화벽 차단 or 서비스 미동작")
+
+        
+    hook = MySqlHook(mysql_conn_id=CONN_ID)
+    print("hook", hook)
+
+    with hook.get_conn() as conn:
+        with conn.cursor() as cur:
+            #cur.execute("USE gaiadb")
+            cur.execute("SELECT 1")
+            result = cur.fetchone()
+            print(f"SELECT 1 결과: {result}")
+
+            # 4) 데이터베이스 목록 확인
+            cur.execute("SHOW TABLES")
+            tables = cur.fetchall()
+            print(f"테이블 목록: {tables}")
+
+            return {
+                "select_1": result,
+                "tables": tables
+            }
 
 
     logging.info("👋 Hello, %s!", name)
