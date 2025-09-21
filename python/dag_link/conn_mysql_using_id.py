@@ -44,9 +44,12 @@ def hello(name: str = "world", **context):
             print(f"테이블 목록: {tables}")
         
             for row in tables:
-                # row는 ('table_name',) 같은 형태
                 print(f"-table.name : {row[0]}")
             
+            cur.execute("select a, b from temp_3")
+            for row in cur.fetchall():
+                print(f"a : {row[0]}, b : {row[1]}")
+                            
             # return {
             #     "select_1": result,
             #     "tables": tables
@@ -57,8 +60,8 @@ def hello(name: str = "world", **context):
     return {"greeted": name}
 
 with DAG(
-    dag_id="conn_mysql",
-    description="가장 단순한 PythonOperator 예제",
+    dag_id="conn_mysql_using_id",
+    description="",
     start_date=pendulum.datetime(2025, 9, 1, tz="Asia/Seoul"),
     schedule="@daily",
     catchup=False,
@@ -66,7 +69,7 @@ with DAG(
         "retries": 1,
         "retry_delay": timedelta(minutes=3),
     },
-    tags=["example", "pythonoperator"],
+    tags=["mysql_connection_test"],
 ) as dag:
 
     say_hello = PythonOperator(
