@@ -7,6 +7,11 @@ from airflow.models import Variable
 from airflow.decorators import task
 
 import logging
+import sys
+import os
+
+sys.path.append(os.path.join(os.path.dirname(__file__), "../lib"))
+from common import check_port
 
 # DAG 기본 설정
 default_args = {
@@ -23,6 +28,13 @@ def simple_hello():
 def say_hello(name: str = "world"):
     logging.info("say_hello from task run, name : %s", name)
     
+    if check_port("host.docker.internal", 3307):
+        logging.info("접속 가능_ok!!!, host : %s, port : %s", "host.docker.internal", 3307)
+    else:
+        logging.warning("방화벽 차단 or 서비스 미동작")
+        return {"greeted": name, "status": "port_unreachable"}
+    
+        
 with DAG(
     dag_id="hello_world",
     default_args=default_args,

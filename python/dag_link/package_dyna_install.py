@@ -17,7 +17,7 @@ def task_using_requests(**context):
 
 
 with DAG(
-    dag_id="dyna_package_install",
+    dag_id="package_dyna_install",
     start_date=datetime(2024, 1, 1),
     schedule=None,
     catchup=False,

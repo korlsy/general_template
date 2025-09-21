@@ -6,6 +6,7 @@ import importlib
 #     format="%(asctime)s [%(levelname)s] %(name)s: %(message)s",
 # )
 
+# sys.path.append(os.path.join(os.path.dirname(__file__), "../lib"))
 
 
 def check_port(ip, port, timeout=3):

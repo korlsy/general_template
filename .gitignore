@@ -4,3 +4,4 @@ my_venv
 .classpath
 .settings
 _private_docs
+__pycache__/
