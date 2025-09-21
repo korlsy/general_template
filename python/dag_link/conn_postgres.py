@@ -5,17 +5,9 @@ import logging
 import pendulum
 from airflow import DAG
 from airflow.operators.python import PythonOperator
-
+from lib.common import check_port
 import socket
 
-
-def check_port(ip, port, timeout=3):
-    try:
-        with socket.create_connection((ip, port), timeout=timeout):
-            return True
-    except Exception as e:
-        return False
-    
 
 def hello(name: str = "world", **context):
 
