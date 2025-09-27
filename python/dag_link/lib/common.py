@@ -8,6 +8,22 @@ import importlib
 
 # sys.path.append(os.path.join(os.path.dirname(__file__), "../lib"))
 
+# common.py
+def with_task_logging(logger):
+    def _decorator(fn):   # 실제 함수를 감싸는 래퍼
+        def _wrap(**context):
+            try:
+                logger.info("작업 시작")
+                return fn(**context)
+            except Exception as e:
+                logger.error("에러 발생", e, exc_info=True)
+                raise
+            finally:
+                logger.info("작업 종료")
+        return _wrap
+    return _decorator
+
+
 
 def check_port(ip, port, timeout=3):
     """
