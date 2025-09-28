@@ -35,7 +35,19 @@ logger = logging.getLogger(__name__) # "airflow.task"
 #     logger.info(f"[{dag_id}.{task_id}] {try_number}번째 재시도!")
 
 
+def debug_error_callback(context):
+    ti: TaskInstance = context.get("task_instance")
 
+    dag_id = context.get("dag").dag_id if context.get("dag") else None
+    logger.error(f"[DEBUG-FAILURE] Task failed: dag={dag_id}, task={ti.task_id}, try={ti.try_number}")
+    logger.error(f"[DEBUG-FAILURE] Exception: {context.get('exception')}")
+    logger.error(f"[DEBUG-FAILURE] Log url: {context.get('task_instance').log_url}")
+
+def debug_success_callback(context):
+    ti: TaskInstance = context["task_instance"]
+    
+    #logger.info( type(ti) ) # airflow.models.taskinstance.TaskInstance
+    logger.info(f"[DEBUG-SUCCESS] Task succeeded: {ti.task_id}, try={ti.try_number}")
 
 default_args = {
     "owner": "airflow",
@@ -44,22 +56,9 @@ default_args = {
     "retry_delay": timedelta(seconds=10),
     "start_date":pendulum.datetime(2025, 9, 1, 0, 0, tz=pendulum.timezone("Asia/Seoul")),
     "on_retry_callback": rich_on_retry_callback,
-    
+    "on_failure_callback": debug_error_callback,
+    "on_success_callback": debug_success_callback,        
 }
-
-def debug_error_callback(context):
-    ti: TaskInstance = context.get("task_instance")
-    
-    dag_id = context.get("dag").dag_id if context.get("dag") else None
-    logger.error(f"[DEBUG-FAILURE] Task failed: dag={dag_id}, task={ti.task_id}, try={ti.try_number}")
-    logger.error(f"[DEBUG-FAILURE] Exception: {context.get('exception')}")
-    logger.error(f"[DEBUG-FAILURE] Log url: {context.get('task_instance').log_url}")
-
-def debug_success_callback(context):
-    ti = context["task_instance"]
-    logger.info(f"[DEBUG-SUCCESS] Task succeeded: {ti.task_id}, try={ti.try_number}")
-
-
 
     
 def _error_template(**context):
@@ -67,7 +66,7 @@ def _error_template(**context):
         logger.info("작업 시작")
         
         result = 0
-        #result = 1 / 0
+        # result = 1 / 0
         logger.info("쿼리 결과: %s", result)
         logger.info("="*100)
         logger.info("end!!!")
@@ -101,8 +100,8 @@ with DAG(
     error_template = PythonOperator(
         task_id="error_template_task",
         python_callable=_error_template,
-        on_failure_callback=debug_error_callback,
-        on_success_callback=debug_success_callback,        
+        # on_failure_callback=debug_error_callback,
+        # on_success_callback=debug_success_callback,        
     )
     
     error_template
