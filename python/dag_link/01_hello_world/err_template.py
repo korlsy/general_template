@@ -11,6 +11,7 @@ import sys
 import os
 import logging
 import traceback
+from airflow.models.taskinstance import TaskInstance
 
 
 sys.path.append(os.path.join(os.path.dirname(__file__), "../lib"))
@@ -46,7 +47,8 @@ default_args = {
 }
 
 def debug_error_callback(context):
-    ti = context.get("task_instance")
+    ti: TaskInstance = context.get("task_instance")
+    
     dag_id = context.get("dag").dag_id if context.get("dag") else None
     logger.error(f"[DEBUG-FAILURE] Task failed: dag={dag_id}, task={ti.task_id}, try={ti.try_number}")
     logger.error(f"[DEBUG-FAILURE] Exception: {context.get('exception')}")

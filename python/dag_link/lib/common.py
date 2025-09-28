@@ -28,6 +28,7 @@ def with_task_logging(logger):
 def check_port(ip, port, timeout=3):
     """
     방화벽 점검
+    docker : host.docker.internal
     """
     import socket
     try:
