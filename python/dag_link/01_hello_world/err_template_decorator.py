@@ -32,7 +32,7 @@ def _error_template_deco(**context):
     logger.info("res = %s", res)
         
 with DAG(
-    dag_id="err_template_deco",
+    dag_id="err_template_decorator",
     default_args=default_args,
     description="",
     schedule=None,
