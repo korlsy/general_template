@@ -14,10 +14,11 @@ import traceback
 from airflow.models.taskinstance import TaskInstance
 
 
-sys.path.append(os.path.join(os.path.dirname(__file__), "../lib"))
-from common import check_port
-from retry_callback import rich_on_retry_callback
-from debug_utils import on_fail, on_success
+#sys.path.append(os.path.join(os.path.dirname(__file__), "../lib"))
+
+from lib.common import check_port
+from lib.retry_callback import rich_on_retry_callback
+from lib.debug_utils import on_fail, on_success
 
 
 logging.basicConfig(level=logging.INFO, format="%(asctime)s [%(levelname)s] %(name)s - %(message)s")
